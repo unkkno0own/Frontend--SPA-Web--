@@ -1,0 +1,15 @@
+<div class="card">
+  <div *ngIf="item.isNew" class="badge-new">NEW</div>
+
+  <img [src]="item.imageUrl" [alt]="item.name">
+  
+  <div class="card-content">
+    <h3>{{ item.name }}</h3>
+    
+    <p class="price" [ngClass]="{'text-muted': !item.inStock, 'text-primary': item.inStock}">
+      {{ item.price }} грн
+    </p>
+
+    <p *ngIf="!item.inStock" class="out-of-stock-label">Тимчасово відсутній</p>
+  </div>
+</div>
