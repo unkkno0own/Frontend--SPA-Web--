@@ -1,6 +1,16 @@
+<div class="items-header">
+  <h2>Каталог товарів</h2>
+  <input 
+    type="text" 
+    [(ngModel)]="searchText" 
+    placeholder="Введіть назву для пошуку..."
+    class="search-input">
+</div>
+
 <div class="products-grid">
   <app-item-card 
-    *ngFor="let product of products" 
-    [item]="product">
+    *ngFor="let product of filteredProducts" 
+    [item]="product"
+    (selectItem)="handleItemSelected($event)">
   </app-item-card>
 </div>
