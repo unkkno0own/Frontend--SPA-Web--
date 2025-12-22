@@ -31,7 +31,6 @@
 }
 .products-grid {
   display: grid;
-  /* Створює колонки: кожна мінімум 300px, максимум — рівна частина простору */
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
   padding: 20px;
