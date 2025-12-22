@@ -1,0 +1,8 @@
+<section class="items-list-container">
+  <h2>Наші товари</h2>
+  <div class="products-grid">
+    @for (product of products; track product.id) {
+      <app-item-card [item]="product"></app-item-card>
+    }
+  </div>
+</section>
