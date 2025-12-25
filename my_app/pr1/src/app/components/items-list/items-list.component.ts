@@ -19,7 +19,7 @@ export class ItemsListComponent implements OnInit, OnDestroy {
   
   private subscription: Subscription = new Subscription();
 
-  constructor(private productService: ProductService) {}
+  constructor(public productService: ProductService) {}
 
   ngOnInit(): void {
     this.subscription = this.productService.products$.subscribe({

@@ -1,11 +1,7 @@
-<div class="card" [ngClass]="{'popular': item.isNew}">
+<div class="card">
   <div *ngIf="item.isNew" class="badge-new">NEW</div>
   <img [src]="item.imageUrl" [alt]="item.name">
-  
-  <div class="card-body">
-    <h3>{{ item.name }}</h3>
-    <p class="price">{{ item.price }} грн</p>
-    
-    <a [routerLink]="['/items', item.id]" class="btn-details">Детальніше</a>
-  </div>
+  <h3>{{ item.name }}</h3>
+  <p>{{ item.description | shorten:40 }}</p>
+  <a [routerLink]="['/items', item.id]">Детальніше</a>
 </div>

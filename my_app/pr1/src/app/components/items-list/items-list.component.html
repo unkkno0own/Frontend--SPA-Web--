@@ -1,17 +1,6 @@
-<div class="items-header">
-  <h2>Каталог товарів</h2>
-  <input 
-    type="text" 
-    [(ngModel)]="searchText" 
-    (ngModelChange)="onSearchChange()"
-    placeholder="Пошук за назвою..."
-    class="search-input">
-</div>
-
 <div class="products-grid">
   <app-item-card 
-    *ngFor="let product of products" 
+    *ngFor="let product of (productService.products$ | async)" 
     [item]="product"
-    (selectItem)="handleItemSelected($any($event))">
-  </app-item-card>
+    appHighlight> </app-item-card>
 </div>
