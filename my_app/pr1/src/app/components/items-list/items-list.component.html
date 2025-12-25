@@ -12,6 +12,6 @@
   <app-item-card 
     *ngFor="let product of products" 
     [item]="product"
-    (selectItem)="handleItemSelected($event)">
+    (selectItem)="handleItemSelected($any($event))">
   </app-item-card>
 </div>

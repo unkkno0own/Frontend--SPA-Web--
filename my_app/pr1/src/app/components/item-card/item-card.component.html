@@ -6,6 +6,6 @@
     <h3>{{ item.name }}</h3>
     <p class="price">{{ item.price }} грн</p>
     
-    <button class="btn-details" (click)="onDetailsClick()">Детальніше</button>
+    <a [routerLink]="['/items', item.id]" class="btn-details">Детальніше</a>
   </div>
 </div>
