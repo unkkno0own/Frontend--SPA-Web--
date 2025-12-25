@@ -3,13 +3,14 @@
   <input 
     type="text" 
     [(ngModel)]="searchText" 
-    placeholder="Введіть назву для пошуку..."
+    (ngModelChange)="onSearchChange()"
+    placeholder="Пошук за назвою..."
     class="search-input">
 </div>
 
 <div class="products-grid">
   <app-item-card 
-    *ngFor="let product of filteredProducts" 
+    *ngFor="let product of products" 
     [item]="product"
     (selectItem)="handleItemSelected($event)">
   </app-item-card>

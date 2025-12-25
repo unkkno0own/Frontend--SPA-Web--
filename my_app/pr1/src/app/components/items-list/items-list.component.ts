@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Product } from '../../shared/models/product.interface';
 import { ProductService } from '../../core/services/product.servise';
 import { ItemCardComponent } from '../item-card/item-card.component';
@@ -12,24 +13,35 @@ import { ItemCardComponent } from '../item-card/item-card.component';
   templateUrl: './items-list.component.html',
   styleUrl: './items-list.component.scss'
 })
-export class ItemsListComponent implements OnInit {
+export class ItemsListComponent implements OnInit, OnDestroy {
   public searchText: string = '';
   public products: Product[] = [];
+  
+  private subscription: Subscription = new Subscription();
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.subscription = this.productService.products$.subscribe({
+      next: (data) => {
+        this.products = data;
+      },
+      error: (err) => console.error('Помилка отримання даних:', err)
+    });
   }
 
-  get filteredProducts(): Product[] {
-    return this.products.filter(p => 
-      p.name.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+  onSearchChange(): void {
+    this.productService.searchProducts(this.searchText);
   }
 
   handleItemSelected(product: Product): void {
-    console.log('Обрано товар:', product);
+    console.log('Деталі товару:', product);
     alert(`Ви переглядаєте: ${product.name}`);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
